@@ -24,7 +24,7 @@ import com.kaneri.admin.mywhatsapp.finalchatapp.MainActivity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatRoom extends AppCompatActivity {
+public class GroupChatRoom extends AppCompatActivity {
 
     LinearLayout layout;
     ImageView sendButton;
@@ -51,10 +51,9 @@ public class ChatRoom extends AppCompatActivity {
             }
         },1);
 
-       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://my-whatsapp-678e8.firebaseio.com/messages/" + UserDetails.name + "/" + UserDetails.name + "_" + UserDetails.chatWith);
-        reference2 = new Firebase("https://my-whatsapp-678e8.firebaseio.com/messages/" + UserDetails.chatWith + "/" + UserDetails.chatWith + "_" + UserDetails.name);
+        reference2 = new Firebase("https://my-whatsapp-678e8.firebaseio.com/groupmessages/" + UserDetails.chatWith );
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +64,14 @@ public class ChatRoom extends AppCompatActivity {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.name);
-                    reference1.push().setValue(map);
+                   // reference1.push().setValue(map);
                     reference2.push().setValue(map);
                     messageArea.setText("");
                 }
             }
         });
 
-        reference1.addChildEventListener(new com.firebase.client.ChildEventListener() {
+        reference2.addChildEventListener(new com.firebase.client.ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
                 Map map = dataSnapshot.getValue(Map.class);
@@ -83,7 +82,7 @@ public class ChatRoom extends AppCompatActivity {
                     addMessageBox("You\n" + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.chatWith + "\n" + message, 2);
+                    addMessageBox(userName + "\n" + message, 2);
                 }
             }
 
@@ -110,14 +109,14 @@ public class ChatRoom extends AppCompatActivity {
     }
 
     public void addMessageBox(String message, int type){
-        LinearLayout layout2 = new LinearLayout(ChatRoom.this);
+        LinearLayout layout2 = new LinearLayout(GroupChatRoom.this);
         layout2.setOrientation(LinearLayout.HORIZONTAL);
-        TextView textView = new TextView(ChatRoom.this);
+        TextView textView = new TextView(GroupChatRoom.this);
         textView.setText(message);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f);
         lp.setMargins(0, 0, 0, 10);
         textView.setLayoutParams(lp);
-        View v = new View(ChatRoom.this);
+        View v = new View(GroupChatRoom.this);
         // LinearLayout.LayoutParams Params1 = new LinearLayout.LayoutParams(0,0,1f);
         v.setLayoutParams(new LinearLayout.LayoutParams(0,0,10));
 

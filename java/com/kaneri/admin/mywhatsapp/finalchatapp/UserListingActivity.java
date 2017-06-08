@@ -16,7 +16,7 @@ import android.view.MenuItem;
 
 
 import com.kaneri.admin.mywhatsapp.R;
-import com.kaneri.admin.mywhatsapp.chat.CallsFragment;
+import com.kaneri.admin.mywhatsapp.chat.GroupFragment;
 import com.kaneri.admin.mywhatsapp.chat.ChatsFragment;
 import com.kaneri.admin.mywhatsapp.chat.ContactsFragment;
 import com.kaneri.admin.mywhatsapp.settings.SettingsActivity;
@@ -24,7 +24,7 @@ import com.kaneri.admin.mywhatsapp.settings.SettingsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListingActivity extends AppCompatActivity implements ChatsFragment.OnFragmentInteractionListener,CallsFragment.OnFragmentInteractionListener,ContactsFragment.OnFragmentInteractionListener{
+public class UserListingActivity extends AppCompatActivity implements ChatsFragment.OnFragmentInteractionListener,GroupFragment.OnFragmentInteractionListener,ContactsFragment.OnFragmentInteractionListener{
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -48,11 +48,14 @@ public class UserListingActivity extends AppCompatActivity implements ChatsFragm
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(1);
 
+        /*Intent service = new Intent(getApplicationContext(), NotificationsService.class);
+        getApplicationContext().startService(service);*/
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CallsFragment(), "CALLS");
+        adapter.addFragment(new GroupFragment(), "GROUPS");
         adapter.addFragment(new ChatsFragment(), "CHATS");
         adapter.addFragment(new ContactsFragment(), "CONTACTS");
         viewPager.setAdapter(adapter);

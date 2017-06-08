@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@drawable/firebase_chat_splash"
-    android:layout_height="match_parent"
-    tools:context="com.example.dell.finalchatapp.SpashScreen">
+    android:background="#4A4F65"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:id="@+id/logo"
+        android:layout_margin="16dp"
+        android:layout_above="@+id/appname"
+        android:layout_centerHorizontal="true"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHATAPP"
+        android:layout_margin="8dp"
+        android:textColor="#fff"
+        android:textSize="32sp"
+        android:id="@+id/appname"
+        android:layout_centerInParent="true"
+        android:fontFamily="casual"
+
+        />
+</RelativeLayout>

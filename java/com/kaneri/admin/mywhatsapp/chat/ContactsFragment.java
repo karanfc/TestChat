@@ -1,13 +1,19 @@
 package com.kaneri.admin.mywhatsapp.chat;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.kaneri.admin.mywhatsapp.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -19,6 +25,10 @@ import com.kaneri.admin.mywhatsapp.R;
  * create an instance of this fragment.
  */
 public class ContactsFragment extends Fragment {
+
+    ArrayList<String> listName = new ArrayList<>();
+    ArrayList<String> listMobileNo = new ArrayList<>();
+    ListView contacts;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,6 +76,24 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_contacts,container,false);
+        contacts = (ListView)view.findViewById(R.id.contactsList);
+
+        Cursor cursor = getActivity().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null, null,null);
+        while (cursor.moveToNext()) {
+            listName.add(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+            if (Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+                Cursor pCur = getActivity().getContentResolver().query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID)),null, null);
+                while (pCur.moveToNext()) {
+                    listMobileNo.add(pCur.getString(pCur.getColumnIndex("DATA1")));
+                }
+                pCur.close();
+            } else
+                listMobileNo.add("");
+        }
+
+        contacts.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listName));
+
 
         return view;
     }

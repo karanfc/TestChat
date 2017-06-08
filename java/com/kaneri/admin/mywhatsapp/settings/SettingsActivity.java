@@ -47,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SettingsActivity.this, DeleteProfile.class));
+                finish();
             }
         });
 
@@ -55,6 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //signOut();
                 startActivity(new Intent(SettingsActivity.this,ChangeEmail.class));
+                finish();
             }
         });
 
@@ -64,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 signOut();
                 startActivity(new Intent(SettingsActivity.this, ChangePassword.class));
+                finish();
             }
         });
 
@@ -72,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 signOut();
                 startActivity(new Intent(SettingsActivity.this, Login.class));
+                finish();
             }
         });
 

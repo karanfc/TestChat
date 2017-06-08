@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +32,14 @@ public class Register extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessageDataReference, ref;
     private FirebaseAuth auth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessageDataReference = mFirebaseDatabase.getReference().child("registrations");
         auth = FirebaseAuth.getInstance();
@@ -130,11 +133,13 @@ public class Register extends AppCompatActivity {
                                     Registrations registration = new Registrations(email,phone_number,name);
                                     mMessageDataReference.push().setValue(registration);
 
+
                                     startActivity(new Intent(Register.this, UserListingActivity.class));
                                     finish();
                                 }
                             }
                         });
+                firebaseUser = auth.getCurrentUser();
             }
         });
 

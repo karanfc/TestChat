@@ -19,16 +19,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edt_name"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@android:color/white" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@android:color/white" />
 
+                <EditText
+                    android:id="@+id/edt_lastname"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:layout_marginLeft="8dp"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
         </android.support.design.widget.TextInputLayout>
 
 
@@ -112,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorAccent"
             android:text="@string/action_sign_in_short"
             android:textColor="#fff"
             android:textStyle="bold" />
@@ -129,7 +146,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="#fff"
             android:textSize="15dp" />
     </LinearLayout>
 

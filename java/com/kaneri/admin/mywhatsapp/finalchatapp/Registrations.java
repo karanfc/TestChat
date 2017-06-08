@@ -9,6 +9,7 @@ public class Registrations {
     private String email;
     private String phone_number;
     private String name;
+    private String groups[] = new String[100];
 
     public Registrations(){
         //Required empty constructor
